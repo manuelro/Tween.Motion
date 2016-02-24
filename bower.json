@@ -1,0 +1,27 @@
+{
+  "name": "tween.motion",
+  "authors": [
+    "Manuel <hola@manuelro.co>"
+  ],
+  "description": "A little wrapper around TweenJS for quick animations. Supports onUpdate and onComplete callbacks and all other tween methods available.",
+  "main": "dist\\tween.motion.js",
+  "moduleType": [],
+  "keywords": [
+    "TweenJS",
+    "wrapper",
+    "animation",
+    "shorthand",
+    "quick",
+    "motion",
+    "simplified"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
