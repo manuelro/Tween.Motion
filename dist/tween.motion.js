@@ -2,16 +2,19 @@
 	'use strict';
 	if(window.TWEEN){
 		window.TWEEN.Motion = Motion;
+		window.TWEEN.Stagger = Stagger;
 	}
-	function Motion(elem, start, target, time, options){
+
+	console.log(window.TWEEN);
+
+	function Motion(elem, start, target, time, options, autostart){
 		if(!elem){ elem = {}; }
 		if(!start){ start = {}; }
 		if(!target){ target = {}; }
 		if(!time){ time = 0; }
 		if(!options){ options = {}; }
-		var onUpdate = function(){
-			for(var key in target) propRec(elem, key, start[key]);
-		};
+		if(typeof autostart === 'undefined' || typeof autostart === 'null'){ autostart = true; }
+
 		var onComplete = function(){};
 		options.callbacks = options.callbacks || {};
 		options.callbacks.onUpdate = options.callbacks.onUpdate || onUpdate;
@@ -28,24 +31,38 @@
 			}
 		}
 
-		tween.start();
 		tween.onUpdate(options.callbacks.onUpdate);
 		tween.onComplete(options.callbacks.onComplete);
+		if(autostart) tween.start();
+
+		function onUpdate(){
+			for(var key in target) propRec(elem, key, start[key]);
+		};
+
+		function propRec(context, route, value){
+			var paths = route.split('.');
+			function rec(context, i, isLast, value){
+				var path = paths[i];
+				if(paths.indexOf(path) === paths.length - 1){ isLast = true; }
+				if(isLast){
+					context[path] = value;
+				} else {
+					i++;
+					if(context[path]){
+						context = context[path]
+						rec(context, i, isLast, value);
+					}
+				}
+			};
+			rec(context, 0, false, value);
+		}
+
+		return tween;
 	}
 
-	var propRec = function(context, route, value){
-		var paths = route.split('.');
-		var rec = function(context, i, isLast, value){
-			var path = paths[i];
-			if(paths.indexOf(path) === paths.length - 1){ isLast = true; }
-			if(isLast){
-				context[path] = value;
-			} else {
-				i++;
-				context = context[path];
-				rec(context, i, isLast, value);
-			}
-		};
-		rec(context, 0, false, value);
-	};
+	function Stagger(elements, tween, delay){
+		for(var i = 0; i < elements.length; i++){
+
+		}
+	}
 })();
