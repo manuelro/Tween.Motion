@@ -24,7 +24,7 @@ In orther to get Tween.Motion working follow the next steps:
 `Tween.Motion` takes a configuration object with some needed properties. Here I'll try to explain them in detail:
 
 ```javascript
-  // Tween.Motion(element, start, target, time, options);
+  // Tween.Motion(config);
 
   //For example
   TWEEN.Motion({
