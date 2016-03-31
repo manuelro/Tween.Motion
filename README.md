@@ -17,7 +17,7 @@ First thing first: make sure you are loading TweenJS library from their original
 In order to get Tween.Motion working follow the next steps:
 * Load TweenJS to your web project
 * Load Tween.Motion to your web project
-* Use `Tween.Motion(element, start, target, time, options)` method to easily create your animations
+* Use `Tween.Motion({... config object ...})` method to easily create your animations
 * Enjoy!
 
 ## API
